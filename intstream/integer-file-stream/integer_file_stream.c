@@ -56,7 +56,7 @@ IntegerFileStream new_integer_file_stream(char * file) {
     if (!self) {
         return NULL;
     }
-    fp = fopen(file, "w+");
+    fp = fopen(file, "r+");
     if (fp == NULL) {
         printf("Cannot open file %s: %s\n", file, strerror(errno));
         exit(1);
