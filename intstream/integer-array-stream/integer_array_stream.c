@@ -73,10 +73,34 @@ void print_int_array(void * instance) {
     for (i = 0; i < self->how_many_elements; i++) {
         printf("%d\n", self->elements[i]);
     }
+    printf("read_position: %d, write_position: %d\n", self->read_position, self->write_position);
 }
 
 void destroy_integer_array_stream(void * instance) {
     IntegerArrayStream self = instance;
-    free(self->elements);
+    if (self->elements) {
+        free(self->elements);
+    }
     free(self);
+}
+
+IntegerArrayStream new_blank_integer_array_stream() {
+    IntegerArrayStream self = malloc(sizeof(struct integer_array_stream));
+    if (!self) {
+        return NULL;
+    }
+    self->elements = NULL;
+    self->how_many_elements = 0;
+    self->read_position = 0;
+    self->write_position = 0;
+    return self;
+}
+
+void hook_integer_array_stream_to_array(void * impl, int * array, int n, int i, int j) {
+    struct integer_array_stream * self = impl;
+
+    self->elements = array;
+    self->how_many_elements = n;
+    self->read_position = i;
+    self->write_position = j + 1;
 }

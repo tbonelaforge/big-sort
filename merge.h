@@ -3,7 +3,11 @@
 
 #include "intstream.h"
 #include "mergeable.h"
+#include "sortable.h"
 
+int merge_sort_in_place(int *, int);
+int merge_sort_chunks(struct sortable, int);
+void cleanup_sortable(struct sortable);
 int merge(IntStream, IntStream, IntStream);
 int pick_lowest(Mergeable, Mergeable, int *);
 

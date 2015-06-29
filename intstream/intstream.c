@@ -51,6 +51,28 @@ IntStream new_int_stream_from_array(int * array, int how_many_elements) {
     return self;
 }
 
+IntStream new_int_stream_for_array() {
+    IntegerArrayStream impl = new_blank_integer_array_stream();
+    IntStream self = NULL;
+    int i;
+
+    if (!impl) {
+        return NULL;
+    }
+    self = malloc(sizeof(struct intstream));
+    if (!self) {
+        destroy_integer_array_stream((void *) impl);
+        return NULL;
+    }
+    self->read = &read_int_from_array;
+    self->write = &write_int_to_array;
+    self->print = &print_int_array;
+    self->reset = &reset_integer_array_stream;
+    self->destroy = &destroy_integer_array_stream;
+    self->implementation = impl;
+    return self;
+}
+
 IntStream new_int_stream_from_file(char * file) {
     IntegerFileStream impl = new_integer_file_stream(file);
     IntStream self = NULL;
@@ -86,3 +108,11 @@ void reset_int_stream(IntStream self) {
     void * implementation = self->implementation;
     (*reset)(implementation);
 }
+
+
+void hook_int_stream_to_array(IntStream stream, int * array, int n, int i, int j) {
+    void * impl = stream->implementation;
+    hook_integer_array_stream_to_array(impl, array, n, i, j);
+
+}
+

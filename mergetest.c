@@ -83,8 +83,35 @@ void test_file_array_array() {
     destroy_int_stream(c);
 }
 
+void test_in_place_merge_sort1() {
+    int A[] = { 2, 5, 1, 7, 9, 8, 13 };
+    int N = 7;
+    int i;
+
+    if (!merge_sort_in_place(A, N)) {
+        printf("There was an error merge sorting in place...\n");
+    }
+    printf("The sorted version is now:\n");
+    for (i = 0; i < N; i++) {
+        printf("%d\n", A[i]);
+    }
+}
+
+void test_in_place_merge_sort2() {
+    int A[] = { 5, 9, 1, 1, 10, 2, 4, 6, 7 };
+    int N = 9;
+    int i;
+
+    if (!merge_sort_in_place(A, N)) {
+        printf("There was an error merge sorting in place...\n");
+    }
+    printf("The sorted version is now:\n");
+    for (i = 0; i < N; i++) {
+        printf("%d\n", A[i]);
+    }
+}
+
 int main() {
-    /*
     printf("About to test array_array_array\n");
     test_array_array_array();
 
@@ -93,7 +120,13 @@ int main() {
 
     printf("About to test array_file_array\n");
     test_array_file_array();
-    */
+
     printf("About to test file_array_array\n");
     test_file_array_array();
+
+    printf("About to test in-place merge sort, with an array containing 8 elements...\n");
+    test_in_place_merge_sort1();
+
+    printf("About to test in-place merge sort, with an array containing 8 elements...\n");
+    test_in_place_merge_sort2();
 }
