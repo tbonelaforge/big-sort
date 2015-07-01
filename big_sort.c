@@ -18,7 +18,7 @@ int read_batch(IntStream input, int * A) {
     return how_many_read;
 }
 
-char * big_sort(char * input_file) {
+char * big_sort(char * input_file, char * output_file) {
     IntStream input = NULL;
     IntStream partial1 = NULL;
     IntStream partial2 = NULL;
@@ -57,6 +57,7 @@ char * big_sort(char * input_file) {
     while ((n = read_batch(input, A)) > 0) {
         merge_sort_in_place(A, n);
         hook_int_stream_to_array(buffer, A, n, 0, n - 1);
+        merge(buffer, partial1, partial2);
         reset_int_stream(partial1);
         reset_int_stream(partial2);
         temp = partial1;
@@ -64,5 +65,6 @@ char * big_sort(char * input_file) {
         partial2 = temp;
     }
     result = get_filename(partial1);
-    return result;
+    rename(result, output_file);
+    return output_file;
 }
