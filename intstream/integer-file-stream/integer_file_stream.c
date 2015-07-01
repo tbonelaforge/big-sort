@@ -49,19 +49,25 @@ int write_int_to_file(void * instance, int output) {
     return 1;
 }
 
-IntegerFileStream new_integer_file_stream(char * file) {
+IntegerFileStream new_integer_file_stream(char * file, int should_create) {
     IntegerFileStream self = malloc(sizeof(struct integer_file_stream));
     FILE * fp = NULL;
 
     if (!self) {
         return NULL;
     }
-    fp = fopen(file, "r+");
+    if (should_create) {
+        fp = fopen(file, "w+");
+    } else {
+        fp = fopen(file, "r+");
+    }
     if (fp == NULL) {
         printf("Cannot open file %s: %s\n", file, strerror(errno));
+        free(self);
         exit(1);
     }
     self->file_ptr = fp;
+    self->file_name = file;
     return self;
 }
 
@@ -69,6 +75,9 @@ void print_int_file(void * instance) {
 }
 
 void reset_integer_file_stream(void * instance) {
+    IntegerFileStream self = instance;
+
+    rewind(self->file_ptr);
 }
 
 void destroy_integer_file_stream(void * instance) {

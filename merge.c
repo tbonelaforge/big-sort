@@ -18,7 +18,7 @@ int compare(int x, int y) {
     return 0;
 }
 
-int merge(IntStream a, IntStream b, IntStream output) {
+int merge(IntStream a, IntStream b, IntStream output, int debug) {
     int how_many_merged = 0;
     struct mergeable left = { a, 0, 0 };
     struct mergeable right = { b, 0, 0 };
@@ -116,7 +116,7 @@ int merge_sort_chunks(struct sortable s, int p) {
         j_1 = min(s.last_index, (k + 1) * pow(2, p) - 1);
         hook_int_stream_to_array(s.a_stream, s.elements, s.last_index + 1, i_0, i_1);
         hook_int_stream_to_array(s.b_stream, s.elements, s.last_index + 1, j_0, j_1);
-        merge(s.a_stream, s.b_stream, s.c_stream);
+        merge(s.a_stream, s.b_stream, s.c_stream, 0);
         k += 1;
     }
     return 1;

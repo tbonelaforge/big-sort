@@ -24,7 +24,8 @@ void reset_int_stream(IntStream);
 void print_int_stream(IntStream);
 void destroy_int_stream(IntStream);
 IntStream new_int_stream_from_array(int *, int);
-IntStream new_int_stream_from_file(char *);
+IntStream new_int_stream_from_file(char *, int);
+char * get_filename(IntStream);
 IntStream new_int_stream_for_array();
 void hook_int_stream_to_array(IntStream, int *, int, int, int);
 

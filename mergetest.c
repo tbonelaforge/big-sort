@@ -34,7 +34,7 @@ void test_array_array_file() {
     IntStream a = new_int_stream_from_array(a_ints, a_n);
     IntStream b = new_int_stream_from_array(b_ints, b_n);
 
-    IntStream c = new_int_stream_from_file(c_file);
+    IntStream c = new_int_stream_from_file(c_file, 0);
     reset_int_stream(c);
     int how_many_merged = merge(a, b, c);
 
@@ -52,7 +52,7 @@ void test_array_file_array() {
     int c_ints[6];
     int c_n = 6;
     IntStream a = new_int_stream_from_array(a_ints, a_n);
-    IntStream b = new_int_stream_from_file(b_file);
+    IntStream b = new_int_stream_from_file(b_file, 0);
     IntStream c = new_int_stream_from_array(c_ints, c_n);
 
     reset_int_stream(c);
@@ -70,7 +70,7 @@ void test_file_array_array() {
     int b_n = 3;
     int c_ints[6];
     int c_n = 6;
-    IntStream a = new_int_stream_from_file(a_file);
+    IntStream a = new_int_stream_from_file(a_file, 0);
     IntStream b = new_int_stream_from_array(b_ints, b_n);
     IntStream c = new_int_stream_from_array(c_ints, c_n);
 

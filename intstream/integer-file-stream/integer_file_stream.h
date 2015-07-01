@@ -5,6 +5,7 @@
 
 struct integer_file_stream {
     FILE * file_ptr;
+    char * file_name;
 };
 
 typedef struct integer_file_stream * IntegerFileStream;
@@ -12,7 +13,7 @@ typedef struct integer_file_stream * IntegerFileStream;
 int read_int_from_file(void *, int *);
 int write_int_to_file(void *, int);
 void reset_integer_file_stream(void *);
-IntegerFileStream new_integer_file_stream(char *);
+IntegerFileStream new_integer_file_stream(char *, int);
 void print_int_file(void *);
 void destroy_integer_file_stream(void *);
 

@@ -73,8 +73,8 @@ IntStream new_int_stream_for_array() {
     return self;
 }
 
-IntStream new_int_stream_from_file(char * file) {
-    IntegerFileStream impl = new_integer_file_stream(file);
+IntStream new_int_stream_from_file(char * file, int should_create) {
+    IntegerFileStream impl = new_integer_file_stream(file, should_create);
     IntStream self = NULL;
     int i;
 
@@ -93,6 +93,12 @@ IntStream new_int_stream_from_file(char * file) {
     self->destroy = &destroy_integer_file_stream;
     self->implementation = impl;
     return self;
+}
+
+char * get_filename(IntStream self) {
+    IntegerFileStream impl = self->implementation;
+
+    return impl->file_name;
 }
 
 void destroy_int_stream(IntStream self) {
